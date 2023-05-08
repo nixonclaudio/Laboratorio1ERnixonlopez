@@ -1,0 +1,107 @@
+---
+title: "Segunda Parte Laboratorio 1"
+output: html_notebook
+---
+
+```{r}
+dir = "D:/Archivos Nixon/BAKUP NIXON/Maestría en Data Science/2 Trimestre Segundo DS/Econometría en R/LaboratoriosER/Laboratorio1R/Laboratorio1_R"
+
+setwd(dir)
+getwd()
+```
+
+### Carga de Datos 
+```{r}
+load("data.RData")
+```
+
+```{r}
+dataset = data.frame(info_estudiantes)
+
+dataset
+```
+
+
+
+### 1. ¿Qué tipo de dato es info_estudiantes? 
+
+
+```{r}
+class(info_estudiantes)
+```
+
+
+### 2. ¿Cuantos elementos tiene info_estudiantes? 
+
+```{r}
+length(info_estudiantes$carnet)
+```
+
+```{r}
+View(dataset)
+```
+
+
+### 3. ¿Qué representa cada uno de los elementos de info_estudiantes? 
+```{r}
+View(info_estudiantes)
+```
+
+
+
+### 4. ¿Cuál es la media de los estudiantes ingresados en el año 2019? 
+
+```{r}
+MediaEstudiantesIngresados = mean(info_estudiantes$promedio[substr(info_estudiantes$carnet, 1, 2) == "19"])
+print(MediaEstudiantesIngresados)
+```
+
+
+
+
+### 5. ¿Cuál es la suma de desviación estándar de los estudiantes que 
+### ingresaron en el año 2016 y 2018?
+
+```{r}
+sumaDesviacionEstandar = sum(sd(info_estudiantes$promedio[substr(info_estudiantes$carnet, 1, 2) == "16"]), sd(info_estudiantes$promedio[substr(info_estudiantes$carnet, 1, 2) == "18"]))
+print(sumaDesviacionEstandar)
+```
+
+
+
+### 6. ¿Cuál es el mínimo de notas de aquellos estudiantes donde su 
+### carnet termina con los números 45 a 48?
+
+```{r}
+minimoNotas = min(info_estudiantes$promedio[grep("45$|46$|47$|48$", info_estudiantes$carnet)])
+print(minimoNotas)
+```
+
+
+
+
+### 7. ¿Cuál es la probabilidad de que un estudiante tipo A tenga una 
+### nota mayor a 85?
+
+```{r}
+probabilidadMayor85. = nrow( dataset[(dataset$tipo == "A") & (dataset$promedio >85 ),])/8000
+print(probabilidadMayor85.*100)
+```
+```{r}
+
+```
+
+
+
+### 8. ¿Cuál es la probabilidad de que un estudiante tipo C haya 
+### ingresado en el año 2017 o 2019?
+```{r}
+probabilidadEstudianteC = nrow( dataset[(dataset$tipo == "C") & (substr(dataset$carnet,1, 2) == "17") | (substr(dataset$carnet,1, 2) == "19"),])/8000
+print(probabilidadEstudianteC*100)
+                                                                                                         
+```
+
+
+
+
+

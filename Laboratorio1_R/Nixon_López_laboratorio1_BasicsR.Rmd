@@ -1,0 +1,237 @@
+---
+title: "Primera parte Laboratorio 1"
+output: html_notebook
+---
+
+
+### 1. ¿Cómo generaría un arreglo aleatorio de 250 elementos con los  colores primarios?
+
+### Vector de colores primarios 
+
+```{r}
+coloresPrimarios = c("amarillo", "rojo", "azul")
+```
+
+
+### Arreglo aleatorio de 250 elementos con los colores primarios
+
+```{r}
+arregloAleatorio = replicate(250, sample(coloresPrimarios, 1))
+print(arregloAleatorio)
+```
+
+
+
+### 2. Dado un arreglo de 120000 elementos de números enteros entre 
+### 40 y 70, ¿Cómo haría para obtener la desviación estándar de 
+### aquellos números que son mayores a 55 y menores a 64?
+
+### Primero se construye el arreglo de 120000 dadas las condiciones
+
+```{r}
+arreglo = sample(40:70, 120000, replace = TRUE)
+```
+
+### Luego se selecciona el rango, de acuerdo a los parámetros requeridos
+
+```{r}
+rangoDeseado = arreglo[arreglo > 55 & arreglo < 64]
+```
+
+### Ahora se determina la desviación estándar 
+```{r}
+desvEstandar = sd(rangoDeseado)
+print(desvEstandar)
+```
+
+### 3. Suponga que se almacena en una variable un arreglo con todos 
+### los números de carnet de los estudiantes del Instituto de 
+### Investigación de Operaciones de la universidad en forma de 
+### string, los carnets tiene al inicio dos caracteres que 
+### identifican el año en el que la persona entró a la universidad 
+### por ejemplo: 19004528 hacer referencia a una persona que 
+### ingreso en el año 2019, 06009878 hace referencia a una persona 
+### que ingreso que el año 2006, ¿Cómo haría para contar la cantidad 
+### de alumnos por año? 
+
+
+
+### Arreglo con los números de carné 
+```{r}
+carnet = c("06009878", "07001596", "18001450", "19001550", "20003650", "21003345")
+```
+
+### Se extraen los primeros caracteres de cada carnet
+
+```{r}
+inicioAnios = substr(carnet, 1, 2)
+```
+
+### Conteo de las ocurrencias por cada año
+```{r}
+tablaInicioAnios = table(inicioAnios)
+print(tablaInicioAnios)
+```
+### si se agregan más alumnos, se contarían de esa forma mediante los carnets
+
+
+
+
+### 4. Define el vector y = (1, 3, 5, 7) utilizando la función c(). 
+### ¿Cómo lo harías con la función seq()? 
+
+### Primero se define la función con c()
+```{r}
+y = c(1, 3, 5, 7)
+print(y)
+```
+
+### Luego con la función seq()
+```{r}
+y2 = seq(from = 1, to = 7, by = 2)
+print(y2)
+```
+
+
+### 5. Si b <- list(a=1:10, c="Hola", d="XX"), escriba una expresión 
+### en R que devuelva todos los elementos de la lista excepto los 
+### elementos 4,6,7,8 del vector a. 
+
+### primero se define la lista b
+```{r}
+b <- list(a=1:10, c="Hola", d="XX")
+print(b)
+```
+
+### Luego se seleccionan los elementos requeridos 
+```{r}
+setA = b[["a"]][-c(4,6:8)]
+```
+
+### Se crea una nueva lista b
+```{r}
+b2 = list(a = setA, c = b[["c"]], d =b[["d"]])
+print(b2)
+```
+
+
+
+### 6. Dado los siguientes vectores, muestre el código en R necesario 
+### para declarar y calcular el promedio, deviación estándar, 
+### mediana, moda y sumatoria total para los siguientes vectores: 
+### a.x=(8,7,6,5)
+### b. y = (3,3, 3, 3, 3, 3, 3, 3, 2, 2) 
+### c. z = (1, 1.75, 2.5, 3.25, 4) 
+
+
+### Se declaran los vectores
+```{r}
+x = c(8,7,6,5)
+y = c(3,3, 3, 3, 3, 3, 3, 3, 2, 2) 
+z = c(1, 1.75, 2.5, 3.25, 4) 
+```
+### Media
+```{r}
+mediax = median(x)
+mediay = median(y)
+mediaz = median(z)
+print(mediax)
+print(mediay)
+print(mediaz)
+
+```
+
+### Desviación Estándar 
+```{r}
+sd(x)  
+sd(y)  
+sd(z)  
+
+```
+
+### Mediana
+```{r}
+median(x)  
+median(y)  
+median(z)
+```
+### Moda
+```{r}
+table_x <- table(x)
+moda_x <- names(table_x)[which.max(table_x)]
+moda_x  
+table_y <- table(y)
+moda_y <- names(table_y)[which.max(table_y)]
+moda_y  
+table_z <- table(z)
+moda_z <- names(table_z)[which.max(table_z)]
+moda_z  
+```
+
+### Sumatoria total
+```{r}
+sum(x)
+sum(y)
+sum(z)
+```
+
+
+### 7. Sabemos que para sumar vectores estos deben tener la misma 
+### longitud. Sin embargo R trabaja de manera distinta. Defina los 
+### vectores x = (1, 2, 3, 4, 5, 6), y = (7, 8), z = (9, 10, 11, 
+### 12). Calcula: 
+### a. x + x
+### b. x + y. 
+### c. Responda ¿Qué ha hecho R? 
+
+### Primero se definen los vectores 
+
+```{r}
+x = c(1, 2, 3, 4, 5, 6)
+y = c(7, 8)
+z = c(9, 10, 11,12)
+```
+
+
+### Luego se realizan los cálculos, 
+```{r}
+x + x
+```
+
+
+```{r}
+x + y
+```
+
+### Lo que hace r es reciclar los elementos, según el cálculo R; lo que hizo,
+### fue sumar los vectores con la misma cantidad según su posición. 
+
+
+
+
+### 8. Dada la variable string <- "Hola Mundo", escriba una instrucción 
+### en R que devuelva la siguiente salida: 
+### [[1]]
+### [1] "Hola"
+### [[2]]
+### [1] "Mundo"
+```{r}
+string <- "Hola Mundo"
+
+palabra <- strsplit(string, " ")
+
+
+lista_de_listas <- lapply(palabra[[1]], function(p) list(p))
+lista_de_listas
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+
